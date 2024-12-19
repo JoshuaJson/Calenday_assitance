@@ -1,8 +1,17 @@
 from AI_Agent import main_agent
 from swarm import Swarm
 import streamlit as st
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
-if __name__ =='_main_':
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
+
+client = OpenAI(api_key=api_key)
+
+
+if __name__ == '__main__':
     swarm_client=Swarm()
     agent = main_agent
     
@@ -18,10 +27,10 @@ if __name__ =='_main_':
     if prompt := st.chat_input('Enter your prompt here'):
         st.session_state.messages.append({'role':'user', 'content':prompt})
         
-        with st.chat_message('user', avatar='user'):
+        with st.chat_message('user', avatar='😊'):
             st.markdown(prompt)
             
-        with st.chat_message('ai', avatar='AI_calendar_man'):
+        with st.chat_message('ai', avatar='🤖'):
             print('session state messege', st.session_state.messages)
             response = swarm_client.run(
                 agent=agent,

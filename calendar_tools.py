@@ -21,7 +21,7 @@ def construct_google_calendar_client(client_secret):
 
 calendar_service= construct_google_calendar_client(client_secret)
 
-def create_calendar_list(calendar_name):
+def create_calendar(calendar_name):
     """
     Create a new calendar list. 
     
@@ -34,7 +34,7 @@ def create_calendar_list(calendar_name):
     calendar_list={
         'summary':calendar_name
     }
-    create_calendar_list= calendar_service.calendarList().insert(body=calendar_list).execute()
+    create_calendar_list= calendar_service.calendars().insert(body=calendar_list).execute()
     return create_calendar_list
 
 def list_calendar_list(max_capacity=200):

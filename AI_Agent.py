@@ -1,6 +1,6 @@
 from swarm import Agent
 from prompts import calendar_agent_system_prompt, main_agent_system_prompt
-from calendar_tools import list_calendar_list, list_calendar_events, insert_calendar_event, create_calendar_list
+from calendar_tools import list_calendar_list, list_calendar_events, insert_calendar_event, create_calendar
 
 MODEL= 'gpt-4o-mini'
 
@@ -25,4 +25,4 @@ calendar_agent= Agent(
     functions=[transfer_to_main_agent]
 )
 
-calendar_agent.functions.extend([list_calendar_list,list_calendar_events,insert_calendar_event,create_calendar_list])
+calendar_agent.functions.extend([list_calendar_list,list_calendar_events,insert_calendar_event,create_calendar])
