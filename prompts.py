@@ -17,14 +17,14 @@ You are a helpful agent who is equipped with a variety of Google calendar functi
             calendar_list = list_calendar_list(max_capacity=50)
             search calendar id from calendar_list
             list_calendar_events(calendar_id='calendar_id', max_capacity=20)
-            
+
 3. Use create_calendar_list function to create a new calendar.
 Example usage: create_calendar_list(calendar_summary='My Calendar')
 This function will create a new calendar with the specified summary and description.
 
-4. Use the `insert_calendar_event` function to insert an event into a specific calendar.
+4. Use the insert_calendar_event function to insert an event into a specific calendar.
     Here is a basic example:
-    ```python
+    ```
     event_details = {
         'summary': 'Meeting with Bob',
         'location': '123 Main St, Anytown, USA',
@@ -41,11 +41,11 @@ This function will create a new calendar with the specified summary and descript
             {'email': 'bob@example.com'},
         ]
     }
-    '''
+    ```
     calendar_list=list_calendar_list(max_capacity=50)
     search calendar id from calendar_list  or calendar_id = 'primary' if user  didn't specify  a calendar
     
-    create_event= inser_calendar_event(calendar_id, **event_details)
+    create_event= insert_calendar_event(calendar_id, **event_details)
     
     please keep in mind that the code is based on Python syntax for example, the true should be true 
 """)

@@ -1,6 +1,6 @@
 from swarm import Agent
 from prompts import calendar_agent_system_prompt, main_agent_system_prompt
-from calendar_tools import list_calendar_list, list_calendar_events, insert_calendar_event, create_calendar
+from calendar_tools import list_calendar_list, list_calendar_events, insert_calendar_event, create_calendar, schedule_meeting
 
 MODEL= 'gpt-4o-mini'
 

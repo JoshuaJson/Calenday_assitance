@@ -1,6 +1,6 @@
 import json
 from google_calendy_api import create_service
-
+from datetime import datetime, timedelta
 client_secret ='client_secret.json'
 
 def construct_google_calendar_client(client_secret):
@@ -48,7 +48,7 @@ def list_calendar_list(max_capacity=200):
     Returns:
     - List: A list of dictionaries containing cleaned calenders list information with 'id', 'name', and 'description'.
     """
-    if isinstance(max_capacity=str):
+    if isinstance(max_capacity,str):
         max_capacity= int(max_capacity)
         
     all_calendars=[]
@@ -121,16 +121,32 @@ def insert_calendar_event(calendar_id, **kwargs):
     Inserts an event into the specified calendar.
 
     Parameters:
-    - service: The Google Calendar API service instance.
     - calendar_id: The ID of the calendar where the event will be inserted.
     - **kwargs: Additional keyword arguments representing the event details.
-    
+
     Returns:
-    - The created event.
+    - The created event or an error message.
     """
-    request_body = json.loads(kwargs['kwargs'])
-    event = calendar_service.events().insert(
-        calendarId=calendar_id,
-        body=request_body
-    ).execute()
-    return event
+    try:
+        # Parse the event details from kwargs
+        request_body = json.loads(kwargs['kwargs'])
+
+        # Validate that start and end times are present
+        if 'start' not in request_body or 'end' not in request_body:
+            raise ValueError("Event must include both 'start' and 'end' times.")
+
+        if not request_body['end']:
+            raise ValueError("Event 'end' time is missing or invalid.")
+
+        # Insert the event
+        event = calendar_service.events().insert(
+            calendarId=calendar_id,
+            body=request_body
+        ).execute()
+        return event
+
+    except ValueError as ve:
+        return {"error": str(ve)}
+
+    except Exception as e:
+        return {"error": f"An unexpected error occurred: {str(e)}"}
